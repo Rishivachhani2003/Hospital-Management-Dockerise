@@ -1,0 +1,249 @@
+ {% extends 'hospital/homebase.html' %} 
+ {% load static %} 
+<!---
+written By : sumit kumar
+facebook : fb.com/sumit.luv
+-->
+
+
+ {% block content %} 
+<head>
+  <!--Navbar.html -- head-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+  <title>One Health - Editing</title>
+  <link rel="stylesheet" href="{% static 'maicons.css'%}">
+  <link rel="stylesheet" href="{% static 'bootstrap.css'%}">
+  <link rel="stylesheet" href="{% static 'owl.carousel.css'%}">
+  <link rel="stylesheet" href="{% static 'animate.css'%}">
+  <link rel="stylesheet" href="{% static 'theme.css'%}">
+
+
+  <script src="{% static 'jquery-3.5.1.min.js' %}"></script>
+  <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'owl.carousel.min.js' %}"></script>
+  <script src="{% static 'wow.min.js' %}"></script>
+  <script src="{% static 'theme.js' %}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  
+  
+ 
+  
+</head>
+<body>
+  
+         
+<!--About-us page content-->
+<!-- .banner-home -->
+
+
+<!--end-->
+
+
+
+<!--
+developed By : sumit kumar
+facebook : fb.com/sumit.luv
+youtube : youtube.com/lazycoders
+-->
+<div class="page-banner overlay-dark bg-image" style="background-image: url('{% static "img1/bg_image_1.jpg" %}');">
+  <div class="banner-section">
+    <div class="container text-center wow fadeInUp">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0 mb-2">
+          <li class="breadcrumb-item"><a href="home">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">About</li>
+        </ol>
+      </nav>
+      <h1 class="font-weight-normal">About Us</h1>
+    </div> <!-- .container -->
+  </div> <!-- .banner-section -->
+</div> <!-- .page-banner -->
+
+<div class="page-section bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 py-3 wow zoomIn">
+        <div class="card-service">
+          <div class="circle-shape bg-secondary text-white">
+            <!-- <span class="mai-chatbubbles-outline"></span> -->
+          </div>
+          <p><span>Chat</span> with a doctors</p>
+        </div>
+      </div>
+      <div class="col-md-4 py-3 wow zoomIn">
+        <div class="card-service">
+          <div class="circle-shape bg-primary text-white">
+            <!-- <span class="mai-shield-checkmark"></span> -->
+          </div>
+          <p><span>One</span>-Health Protection</p>
+        </div>
+      </div>
+      <div class="col-md-4 py-3 wow zoomIn">
+        <div class="card-service">
+          <div class="circle-shape bg-accent text-white">
+            <!-- <span class="mai-basket"></span> -->
+          </div>
+          <p><span>One</span>-Health Pharmacy</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 wow fadeInUp">
+        <h1 class="text-center mb-3">Welcome to Your Health Center</h1>
+        <div class="text-lg">
+          <p style="text-align: justify;">We have the best doctors and the most care-focused teams coupled with the most advanced equipment, cutting-edge treatments and technologies, including Proton therapy, robotic surgeries, artificial intelligence and more. These ensure we can get you healthy quickly so you can get back to leading a happy and fulfilling life.</p>
+          <p style="text-align: justify;">As our country emerges from the pandemic, One Health will focus its efforts on the NCD epidemic, including diabetes, CVD and cancer. Sedentary lifestyles and unhealthy diets have made our youth susceptible to these chronic diseases. Over 50% of premature mortality in India in the 30+ age group can be attributed to NCDs. India will spend around $5 trillion by 2030 to combat NCDs.!</p>
+        </div>
+      </div>
+      <!-- <div class="col-lg-10 mt-5">
+        <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-4 wow zoomIn">
+            <div class="card-doctor">
+              <div class="header">
+                <img src="../assets/img/doctors/doctor_1.jpg" alt="">
+                <div class="meta">
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                </div>
+              </div>
+              <div class="body">
+                <p class="text-xl mb-0">Dr. Divyesh Lagadhir</p>
+                <span class="text-sm text-grey">Cardiology</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 wow zoomIn">
+            <div class="card-doctor">
+              <div class="header">
+                <img src="../assets/img/doctors/doctor_2.jpg" alt="">
+                <div class="meta">
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                </div>
+              </div>
+              <div class="body">
+                <p class="text-xl mb-0">Dr. Kishan Patel</p>
+                <span class="text-sm text-grey">Dental</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 wow zoomIn">
+            <div class="card-doctor">
+              <div class="header">
+                <img src="../assets/img/doctors/doctor_3.jpg" alt="">
+                <div class="meta">
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                </div>
+              </div>
+              <div class="body">
+                <p class="text-xl mb-0">Dr. Ashish Madan</p>
+                <span class="text-sm text-grey">General Health</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="page-section banner-home bg-image" style="background-image: url('{% static "img1/banner-pattern.svg" %}');">
+  <div class="container py-5 py-lg-0">
+    <div class="row align-items-center">
+      <div class="col-lg-4 wow zoomIn">
+        <div class="img-banner d-none d-lg-block">
+          <img src="{% static "img1/mobile_app.png" %}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-8 wow fadeInRight">
+        <h1 class="font-weight-normal mb-3">Get easy access of all features using One Health Application</h1>
+        <a href="#"><img src="{% static "img1/google_play.svg" %}" alt=""></a>
+        <a href="#" class="ml-2"><img src="{% static "img1/app_store.svg" %}" alt=""></a>
+      </div>
+    </div>
+  </div>
+</div> <!-- .banner-home -->
+
+<footer class="page-footer">
+  <div class="container">
+      <div class="row px-md-3">
+          <div class="col-sm-6 col-lg-3 py-3">
+              <h5>Company</h5>
+              <ul class="footer-menu">
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Career</a></li>
+                  <li><a href="#">Editorial Team</a></li>
+                  <li><a href="#">Protection</a></li>
+              </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3 py-3">
+              <h5>More</h5>
+              <ul class="footer-menu">
+                  <li><a href="#">Terms & Condition</a></li>
+                  <li><a href="#">Privacy</a></li>
+                  <li><a href="#">Advertise</a></li>
+                  <li><a href="#">Join as Doctors</a></li>
+              </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3 py-3">
+              <h5>Our partner</h5>
+              <ul class="footer-menu">
+                  <li><a href="#">One-Fitness</a></li>
+                  <li><a href="#">One-Drugs</a></li>
+                  <li><a href="#">One-Live</a></li>
+              </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3 py-3">
+              <h5>Contact</h5>
+              <p class="footer-link mt-2">351 Alkapuri, Vadodara, 391410</p>
+              <a href="#" class="footer-link">820-015-8462</a>
+              <a href="#" class="footer-link">one.health@gmail.com</a>
+
+
+          </div>
+      </div>
+
+      <hr>
+
+      <p id="copyright">Copyright &copy; 2022 <a href="https://macodeid.com/" target="_blank">One-Health</a>. All right reserved</p>
+          </div>
+  </div>
+</footer>
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="../assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+
+<script src="../assets/vendor/wow/wow.min.js"></script>
+
+<script src="../assets/js/theme.js"></script>
+
+
+
+{% endblock content %}
+<!-- footer.html footer-->
+  <script src="jquery-3.5.1.min.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+  <script src="owl.carousel.min.js"></script>
+  <script src="wow.min.js"></script>
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--end-->
+
+</body>
