@@ -24,14 +24,15 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 docker --version
 
 # Define variables
-DOCKER_IMAGE="dockerfile"
+DOCKERFILE_PATH="./Dockerfile"  # Path to the Dockerfile in your project directory
+DOCKER_IMAGE="my_docker_image"  # Image name
 CONTAINER_NAME="dockerfile_container"
 
-# Pull the Docker image
-echo "Pulling Docker image: $DOCKER_IMAGE"
-docker pull $DOCKER_IMAGE
+# Build Docker image from Dockerfile
+echo "Building Docker image: $DOCKER_IMAGE"
+docker build -t $DOCKER_IMAGE -f $DOCKERFILE_PATH .
 
-# Run a container from the image
+# Run a container from the built image
 echo "Running Docker container: $CONTAINER_NAME"
 docker run -d --name $CONTAINER_NAME $DOCKER_IMAGE
 
@@ -68,5 +69,23 @@ echo "Docker container '$CONTAINER_NAME' is running successfully."
 # # Verify Docker installation
 # docker --version
 
+# # Define variables
+# DOCKER_IMAGE="dockerfile"
+# CONTAINER_NAME="dockerfile_container"
+
+# # Pull the Docker image
+# echo "Pulling Docker image: $DOCKER_IMAGE"
+# docker pull $DOCKER_IMAGE
+
+# # Run a container from the image
+# echo "Running Docker container: $CONTAINER_NAME"
+# docker run -d --name $CONTAINER_NAME $DOCKER_IMAGE
+
+# # Display running containers
+# echo "Currently running containers:"
+# docker ps
+
 # # Print success message
-# echo "Docker has been successfully installed."
+# echo "Docker container '$CONTAINER_NAME' is running successfully."
+
+
