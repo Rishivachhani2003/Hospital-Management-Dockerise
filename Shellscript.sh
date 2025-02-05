@@ -15,10 +15,14 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 sudo add-apt-repository \
    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) stable"
+echo "step 1 completed" 
 
-# Install Docker
-sudo apt-get update -y
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+# # Install Docker
+# sudo apt-get update -y
+# sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+echo "docker installed successfully"
 
 # Verify Docker installation
 docker --version
