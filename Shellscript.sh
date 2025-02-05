@@ -34,15 +34,15 @@ CONTAINER_NAME="dockerfile_container"
 
 # Build Docker image from Dockerfile
 echo "Building Docker image: $DOCKER_IMAGE"
-docker build -t $DOCKER_IMAGE -f $DOCKERFILE_PATH .
+sudo docker build -t $DOCKER_IMAGE -f $DOCKERFILE_PATH .
 
 # Run a container from the built image
 echo "Running Docker container: $CONTAINER_NAME"
-docker run -d --name $CONTAINER_NAME $DOCKER_IMAGE
+sudo docker run -d --name $CONTAINER_NAME $DOCKER_IMAGE
 
 # Display running containers
 echo "Currently running containers:"
-docker ps
+sudo docker ps
 
 # Print success message
 echo "Docker container '$CONTAINER_NAME' is running successfully."
