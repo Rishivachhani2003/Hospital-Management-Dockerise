@@ -2,20 +2,21 @@ name: Docker Build & Security Scan
 
 on:
   push:
-    branches: newbranch 
+    branches: [newbranch]
   pull_request:
-    branches: newbranch 
+    branches: [newbranch]
 
 jobs:
   security-scan:
     name: Trivy & Gitleaks Scan
     runs-on: ubuntu-latest
+    outputs:
+      scan_passed: ${{ steps.check-scan.outputs.scan_passed }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Run Trivy vulnerability scanner
-        id: trivy
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: fs
@@ -30,7 +31,6 @@ jobs:
           trivy fs . > scan-results/trivy.txt
 
       - name: Run Gitleaks secret scan
-        id: gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
           args: --source=. --report-path=scan-results/gitleaks.txt --no-banner || true
@@ -49,18 +49,23 @@ jobs:
 
       - name: Send Telegram Message - Scan Results
         run: |
+          MESSAGE=$(cat <<EOF
+🔍 *Security Scan Completed*
+
+*Trivy & Gitleaks Results:*
+\`\`\`
+$(tail -n 20 scan-results/trivy.txt)
+
+$(tail -n 20 scan-results/gitleaks.txt)
+\`\`\`
+
+*Passed:* ${{ steps.check-scan.outputs.scan_passed }}
+EOF
+)
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
             -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
             -d parse_mode=Markdown \
-            -d text="🔍 *Security Scan Completed*
-
-*Trivy & Gitleaks Results:*
-$(cat scan-results/trivy.txt | tail -n 20)
-
-$(cat scan-results/gitleaks.txt | tail -n 20)
-
-*Passed:* ${{ steps.check-scan.outputs.scan_passed }}
-"
+            --data-urlencode text="$MESSAGE"
 
   docker-build:
     name: Build Docker Image
@@ -72,22 +77,24 @@ $(cat scan-results/gitleaks.txt | tail -n 20)
         uses: actions/checkout@v3
 
       - name: Set Docker image name
-        run: |
-          echo "IMAGE_NAME=${{ secrets.DOCKER_IMAGE_NAME || 'my-image' }}" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=${{ secrets.DOCKER_IMAGE_NAME || 'my-image' }}" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
 
       - name: Send Telegram Message - Docker Build
         run: |
-          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d parse_mode=Markdown \
-            -d text="🐳 *Docker Build Completed Successfully*
+          MESSAGE=$(cat <<EOF
+🐳 *Docker Build Completed Successfully*
 
 Image: \`${{ env.IMAGE_NAME }}\`
 Status: ✅ Build successful
-"
+EOF
+)
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -d parse_mode=Markdown \
+            --data-urlencode text="$MESSAGE"
 
   build-skipped:
     name: Notify if Build Skipped
@@ -97,10 +104,14 @@ Status: ✅ Build successful
     steps:
       - name: Send Telegram Message - Build Skipped
         run: |
+          MESSAGE=$(cat <<EOF
+🚫 *Build Skipped due to Security Issues*
+
+Scan detected high/critical vulnerabilities or leaked secrets.
+Fix the issues and try again.
+EOF
+)
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
             -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
             -d parse_mode=Markdown \
-            -d text="🚫 *Build Skipped due to Security Issues*
-
-Scan detected high/critical vulnerabilities or leaked secrets.
-Fix the issues and try again."
+            --data-urlencode text="$MESSAGE"
