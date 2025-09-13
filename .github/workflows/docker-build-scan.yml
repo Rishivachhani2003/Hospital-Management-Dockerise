@@ -40,7 +40,6 @@ jobs:
         run: |
           has_trivy_issues=$(grep -c 'CRITICAL\|HIGH' scan-results/trivy.txt || true)
           has_gitleaks_issues=$(grep -c 'leak' scan-results/gitleaks.txt || true)
-
           if [ "$has_trivy_issues" -gt 0 ] || [ "$has_gitleaks_issues" -gt 0 ]; then
             echo "scan_passed=false" >> $GITHUB_OUTPUT
           else
@@ -49,19 +48,17 @@ jobs:
 
       - name: Send Telegram Message - Scan Results
         run: |
-          MESSAGE=$(cat <<EOF
-🔍 *Security Scan Completed*
+          MESSAGE="🔍 *Security Scan Completed*
 
-*Trivy & Gitleaks Results:*
-\`\`\`
-$(tail -n 20 scan-results/trivy.txt)
-
-$(tail -n 20 scan-results/gitleaks.txt)
-\`\`\`
-
-*Passed:* ${{ steps.check-scan.outputs.scan_passed }}
-EOF
-)
+          *Trivy & Gitleaks Results:*
+          \`\`\`
+          $(tail -n 20 scan-results/trivy.txt)
+          
+          $(tail -n 20 scan-results/gitleaks.txt)
+          \`\`\`
+          
+          *Passed:* ${{ steps.check-scan.outputs.scan_passed }}"
+          
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
             -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
             -d parse_mode=Markdown \
@@ -84,13 +81,11 @@ EOF
 
       - name: Send Telegram Message - Docker Build
         run: |
-          MESSAGE=$(cat <<EOF
-🐳 *Docker Build Completed Successfully*
-
-Image: \`${{ env.IMAGE_NAME }}\`
-Status: ✅ Build successful
-EOF
-)
+          MESSAGE="🐳 *Docker Build Completed Successfully*
+          
+          Image: \`${{ env.IMAGE_NAME }}\`
+          Status: ✅ Build successful"
+          
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
             -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
             -d parse_mode=Markdown \
@@ -104,13 +99,11 @@ EOF
     steps:
       - name: Send Telegram Message - Build Skipped
         run: |
-          MESSAGE=$(cat <<EOF
-🚫 *Build Skipped due to Security Issues*
-
-Scan detected high/critical vulnerabilities or leaked secrets.
-Fix the issues and try again.
-EOF
-)
+          MESSAGE="🚫 *Build Skipped due to Security Issues*
+          
+          Scan detected high/critical vulnerabilities or leaked secrets.
+          Fix the issues and try again."
+          
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
             -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
             -d parse_mode=Markdown \
